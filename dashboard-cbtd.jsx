@@ -88,25 +88,27 @@ const dadosOriginais = {
     }
   },
   "2026": {
-    "total_inscricoes": 185,
+    "total_inscricoes": 248,
     "total_semanas": 7,
     "periodo_inicio": "2025-11-28",
     "periodo_fim": "2026-01-15",
     "por_semana": {
-      "1": 26,
+      "0": 9,
+      "1": 84,
       "2": 18,
-      "3": 25,
+      "3": 23,
       "4": 38,
-      "5": 36,
-      "6": 42
+      "5": 35,
+      "6": 41
     },
     "rascunhos_por_semana": {
-      "1": 25,
-      "2": 16,
-      "3": 19,
+      "0": 9,
+      "1": 66,
+      "2": 14,
+      "3": 16,
       "4": 26,
-      "5": 23,
-      "6": 28
+      "5": 22,
+      "6": 26
     }
   }
 };
@@ -669,7 +671,7 @@ export default function Dashboard() {
             Concentração na Última Semana
           </h4>
           <p style={{ margin: 0, color: '#E2E8F0', fontSize: '28px', fontWeight: '800' }}>
-            ~70%
+            ~58%
           </p>
           <p style={{ margin: '4px 0 0 0', color: '#94A3B8', fontSize: '13px' }}>
             média de inscrições no final
@@ -680,18 +682,53 @@ export default function Dashboard() {
           background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.02) 100%)',
           border: '1px solid rgba(239, 68, 68, 0.2)',
           borderRadius: '16px',
-          padding: '24px'
+          padding: '24px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center'
         }}>
-          <div style={{ fontSize: '28px', marginBottom: '12px' }}>📍</div>
-          <h4 style={{ margin: '0 0 8px 0', color: '#EF4444', fontSize: '14px', fontWeight: '600' }}>
-            2026 em Andamento
+          <h4 style={{ margin: '0 0 16px 0', color: '#EF4444', fontSize: '14px', fontWeight: '600', textAlign: 'center' }}>
+            🎯 Meta 2026
           </h4>
-          <p style={{ margin: 0, color: '#E2E8F0', fontSize: '28px', fontWeight: '800' }}>
-            185
-          </p>
-          <p style={{ margin: '4px 0 0 0', color: '#94A3B8', fontSize: '13px' }}>
-            inscrições até agora (faltam ~1 semana)
-          </p>
+
+          {/* Velocímetro SVG */}
+          <svg width="200" height="120" viewBox="0 0 200 120" style={{ marginBottom: '12px' }}>
+            {/* Arco de fundo (cinza) */}
+            <path
+              d="M 20 100 A 80 80 0 0 1 180 100"
+              fill="none"
+              stroke="rgba(148, 163, 184, 0.2)"
+              strokeWidth="20"
+              strokeLinecap="round"
+            />
+            {/* Arco de progresso (vermelho) */}
+            <path
+              d="M 20 100 A 80 80 0 0 1 180 100"
+              fill="none"
+              stroke="#EF4444"
+              strokeWidth="20"
+              strokeLinecap="round"
+              strokeDasharray={`${(248/437) * 251.2} 251.2`}
+              style={{ transition: 'stroke-dasharray 1s ease-out' }}
+            />
+            {/* Texto central - Valor atual */}
+            <text x="100" y="75" textAnchor="middle" fill="#E2E8F0" fontSize="32" fontWeight="800">
+              248
+            </text>
+            {/* Texto - Percentual */}
+            <text x="100" y="95" textAnchor="middle" fill="#94A3B8" fontSize="14">
+              {Math.round((248/437) * 100)}% da meta
+            </text>
+          </svg>
+
+          <div style={{ textAlign: 'center', width: '100%' }}>
+            <p style={{ margin: '0 0 4px 0', color: '#94A3B8', fontSize: '12px' }}>
+              Meta: <span style={{ color: '#E2E8F0', fontWeight: '600' }}>437</span> inscrições
+            </p>
+            <p style={{ margin: 0, color: '#94A3B8', fontSize: '12px' }}>
+              Faltam: <span style={{ color: '#EF4444', fontWeight: '600' }}>{437 - 248}</span> inscrições
+            </p>
+          </div>
         </div>
       </div>
 
@@ -820,7 +857,7 @@ export default function Dashboard() {
           pela squad REVELA da Rockbuzz
         </p>
         <p style={{ margin: '8px 0 0 0', opacity: 0.7 }}>
-          Dashboard atualizado em 05/01/2026
+          Dashboard atualizado em 08/01/2026
         </p>
       </div>
     </div>
